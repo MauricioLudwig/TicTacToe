@@ -9,6 +9,7 @@ namespace TicTacToe
     class Game
     {
 
+
         public void Start()
         {
 
@@ -18,7 +19,6 @@ namespace TicTacToe
             while (!gameOver)
             {
                 Console.Clear();
-                grid.PrintGrid();
                 grid.PlaceMarker();
 
             }

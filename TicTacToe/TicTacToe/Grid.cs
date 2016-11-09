@@ -41,24 +41,42 @@ namespace TicTacToe
         }
 
         public void PlaceMarker()
-        {            
+        {
+            var mTaken = true;
 
-            Console.Write("Row:    ");
-            int rowInput = int.Parse(Console.ReadLine());
-            Console.Write("Column: ");
-            int colInput = int.Parse(Console.ReadLine());
-
-            var index = Nodes.Where(node => (node.Row == rowInput && node.Col == colInput));
-
-            foreach (var x in index)
+            while (mTaken)
             {
-                x.Player = ActivePlayer;
-                x.Taken = true;
-                x.Marker = x.Player.ToString();
+                Console.Clear();
+                PrintGrid();
+
+                Console.Write("Row:    ");
+                int rowInput = int.Parse(Console.ReadLine());
+                Console.Write("Column: ");
+                int colInput = int.Parse(Console.ReadLine());
+
+                var y = Nodes
+                    .Where(node => (node.Row == rowInput && node.Col == colInput));
+
+                var tempList = Nodes
+                    .Where(node => node.Taken == false);
+
+                Console.WriteLine(y);
+
+                Console.ReadKey();
+
+                var index = tempList
+                    .Where(node => (node.Row == rowInput && node.Col == colInput));
+
+                foreach (var x in index)
+                {
+                    x.Player = ActivePlayer;
+                    x.Taken = true;
+                    x.Marker = x.Player.ToString();
+                }
+
             }
 
             ActivePlayer++;
-
             Console.ReadKey();
         }
 
