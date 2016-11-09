@@ -20,8 +20,12 @@ namespace TicTacToe
             {
                 Console.Clear();
                 grid.PlaceMarker();
-
+                gameOver = grid.isGameOver();
             }
+
+            Console.Clear();
+            grid.PrintGrid();
+            Console.WriteLine("Game over? Player {0} won", grid.ActivePlayer);
 
         }
 
