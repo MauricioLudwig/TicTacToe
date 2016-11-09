@@ -12,6 +12,18 @@ namespace TicTacToe
         public void Start()
         {
 
+            Grid grid = new Grid();
+            bool gameOver = false;
+
+            while (!gameOver)
+            {
+                Console.Clear();
+                grid.PrintGrid();
+                grid.PlaceMarker();
+
+            }
+
         }
+
     }
 }
