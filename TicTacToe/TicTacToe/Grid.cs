@@ -9,6 +9,9 @@ namespace TicTacToe
     class Grid
     {
 
+        public event EventHandler GameOverReached;
+        public int Threshold { get; set; }
+        public int Round { get; set; }
         public List<INode> Nodes { get; set; }
         private int activePlayer;
         public int ActivePlayer
@@ -39,10 +42,13 @@ namespace TicTacToe
             };
 
             ActivePlayer = 1;
+            Threshold = Nodes.Count;
+            Round = 1;
         }
 
         public void PlaceMarker()
         {
+
             var loop = true;
 
             while (loop)
@@ -136,9 +142,22 @@ namespace TicTacToe
             if (!gameOver)
                 ActivePlayer++;
 
+            if (Round >= Threshold)
+            {
+                OnGameOverReached(EventArgs.Empty);
+                Console.ReadKey();
+                gameOver = true;
+            }
+
             return gameOver;
         }
 
+        protected virtual void OnGameOverReached(EventArgs e)
+        {
+            EventHandler handler = GameOverReached;
+            if (handler != null)
+                handler(this, e);
+        }
 
     }
 }

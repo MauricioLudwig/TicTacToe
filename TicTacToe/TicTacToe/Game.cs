@@ -16,16 +16,22 @@ namespace TicTacToe
             Grid grid = new Grid();
             bool gameOver = false;
 
+            grid.GameOverReached += (sender, e) =>
+            {
+                Console.WriteLine(Environment.NewLine + "Draw!");
+            };
+
             while (!gameOver)
             {
                 Console.Clear();
                 grid.PlaceMarker();
                 gameOver = grid.isGameOver();
+                grid.Round++;
             }
 
             Console.Clear();
             grid.PrintGrid();
-            Console.WriteLine("Game over? Player {0} won", grid.ActivePlayer);
+            Console.WriteLine("Game over! Player {0} won", grid.ActivePlayer);
 
         }
 
