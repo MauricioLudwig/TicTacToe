@@ -8,11 +8,8 @@ namespace TicTacToe
 {
     class Game
     {
-
-
         public void Start()
         {
-
             Grid grid = new Grid();
             bool gameOver = false;
 
@@ -36,6 +33,5 @@ namespace TicTacToe
                 Console.WriteLine("Game over! Player {0} won", grid.ActivePlayer);
             }
         }
-
     }
 }
