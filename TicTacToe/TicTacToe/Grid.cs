@@ -8,7 +8,7 @@ namespace TicTacToe
 {
     class Grid
     {
-
+        public bool gameWon { get; set; }
         public event EventHandler GameOverReached;
         public int Threshold { get; set; }
         public int Round { get; set; }
@@ -101,7 +101,7 @@ namespace TicTacToe
         }
         private int ChooseRowOrColumn()
         {
-            var input = Console.ReadKey(false).Key; 
+            var input = Console.ReadKey(false).Key;
             switch (input)
             {
                 case ConsoleKey.D1:
@@ -126,18 +126,22 @@ namespace TicTacToe
             {
                 if (Nodes[x].Marker == ActivePlayer.ToString() && Nodes[x + 1].Marker == ActivePlayer.ToString() && Nodes[x + 2].Marker == ActivePlayer.ToString())
                     gameOver = true;
+                    gameWon = true;
             }
 
             for (int y = 0; y < 3; y++)
             {
                 if (Nodes[y].Marker == ActivePlayer.ToString() && Nodes[y + 3].Marker == ActivePlayer.ToString() && Nodes[y + 6].Marker == ActivePlayer.ToString())
                     gameOver = true;
+                    gameWon = true;
             }
 
             if (Nodes[0].Marker == ActivePlayer.ToString() && Nodes[4].Marker == ActivePlayer.ToString() && Nodes[8].Marker == ActivePlayer.ToString())
                 gameOver = true;
+                gameWon = true;
             if (Nodes[2].Marker == ActivePlayer.ToString() && Nodes[4].Marker == ActivePlayer.ToString() && Nodes[6].Marker == ActivePlayer.ToString())
                 gameOver = true;
+                gameWon = true;
 
             if (!gameOver)
                 ActivePlayer++;
@@ -145,7 +149,6 @@ namespace TicTacToe
             if (Round >= Threshold)
             {
                 OnGameOverReached(EventArgs.Empty);
-                Console.ReadKey();
                 gameOver = true;
             }
 

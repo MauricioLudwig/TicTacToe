@@ -31,8 +31,10 @@ namespace TicTacToe
 
             Console.Clear();
             grid.PrintGrid();
-            Console.WriteLine("Game over! Player {0} won", grid.ActivePlayer);
-
+            if (grid.gameWon)
+            {
+                Console.WriteLine("Game over! Player {0} won", grid.ActivePlayer);
+            }
         }
 
     }
