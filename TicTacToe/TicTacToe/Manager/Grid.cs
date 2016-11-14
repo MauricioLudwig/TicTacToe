@@ -8,7 +8,7 @@ namespace TicTacToe
 {
     class Grid
     {
-        public bool gameWon { get; set; }
+        public bool gameWon { get; set; } = false;
         public event EventHandler GameOverReached;
         public int Threshold { get; set; }
         public int Round { get; set; }
@@ -125,31 +125,40 @@ namespace TicTacToe
             for (int x = 0; x < 9; x += 3)
             {
                 if (Nodes[x].Marker == ActivePlayer.ToString() && Nodes[x + 1].Marker == ActivePlayer.ToString() && Nodes[x + 2].Marker == ActivePlayer.ToString())
+                {
                     gameOver = true;
                     gameWon = true;
+                }
             }
 
             for (int y = 0; y < 3; y++)
             {
                 if (Nodes[y].Marker == ActivePlayer.ToString() && Nodes[y + 3].Marker == ActivePlayer.ToString() && Nodes[y + 6].Marker == ActivePlayer.ToString())
+                {
                     gameOver = true;
                     gameWon = true;
+                }
             }
 
             if (Nodes[0].Marker == ActivePlayer.ToString() && Nodes[4].Marker == ActivePlayer.ToString() && Nodes[8].Marker == ActivePlayer.ToString())
+            {
                 gameOver = true;
                 gameWon = true;
+            }
             if (Nodes[2].Marker == ActivePlayer.ToString() && Nodes[4].Marker == ActivePlayer.ToString() && Nodes[6].Marker == ActivePlayer.ToString())
+            {
                 gameOver = true;
                 gameWon = true;
+            }
 
             if (!gameOver)
                 ActivePlayer++;
 
-            if (Round >= Threshold)
+            if (Round >= Threshold && gameWon == false)
             {
                 OnGameOverReached(EventArgs.Empty);
                 gameOver = true;
+                Console.ReadKey();
             }
 
             return gameOver;
@@ -157,10 +166,7 @@ namespace TicTacToe
 
         protected virtual void OnGameOverReached(EventArgs e)
         {
-            EventHandler handler = GameOverReached;
-            if (handler != null)
-                handler(this, e);
+            GameOverReached?.Invoke(this, e);
         }
-
     }
 }
